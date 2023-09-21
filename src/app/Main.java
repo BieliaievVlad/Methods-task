@@ -20,10 +20,7 @@ public class Main {
 
         getData();
         showProduct();
-        calcPayment(price, amount);
-        calcDiscont(payment);
-        calcDiscAmount(payment, discount);
-        calcDiscPayment(payment, discAmount);
+        handleData();
         getOutput(payment, discAmount, discPayment);
     }
 
@@ -47,11 +44,18 @@ public class Main {
         sc.close();
     }
 
-     private static double calcPayment(double price, int amount) {
-        return payment = price * amount;
+    private static void handleData() {
+        payment = calcPayment(price, amount);
+        discount = calcDiscount(payment);
+        discAmount = calcDiscAmount(payment, discount);
+        discPayment = calcDiscPayment(payment, discAmount);
     }
 
-    private static double calcDiscont(double payment) {
+     private static double calcPayment(double price, int amount) {
+        return price * amount;
+    }
+
+    private static double calcDiscount(double payment) {
         if (payment > 0 & payment <= 5000) {
             discount = 5;
         } else if (payment > 5000.01 & payment <= 10000) {
@@ -63,11 +67,11 @@ public class Main {
     }
 
     private static double calcDiscAmount(double payment, double discount) {
-        return discAmount = payment * discount / 100;
+        return payment * discount / 100;
     }
 
     private static double calcDiscPayment(double payment, double discAmount) {
-        return discPayment = payment - discAmount;
+        return payment - discAmount;
     }
 
     private static void getOutput(double pay, double discAmount, double discPay) {
